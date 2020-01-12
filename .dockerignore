@@ -1,0 +1,6 @@
+node_modules
+dist
+redis.conf
+.vscode
+.env
+/docker-secrets

@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  node:
+    build:
+      context: ./
+      dockerfile: 'Dockerfile'
+    container_name: node-container
+    command: 'sleep infinity'
+    networks:
+      - api-net
+    secrets:
+      - founderpass
+    environment: 
+      - FOUNDERPASS=/run/secrets/founderpass.txt
+    env_file: .env
+networks:
+  api-net:
+#  web-net:
+secrets:
+  founderpass:
+    file: docker-secrets/founderpass.txt

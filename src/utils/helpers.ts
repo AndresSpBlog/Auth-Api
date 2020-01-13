@@ -1,10 +1,10 @@
 export class Helpers {
-    constructor() {}
+  constructor() {}
 
-    public checkIfEnvExist = (envVariable: string) => {
-        if(!envVariable){
-            throw `${envVariable} not defined`
-        }
-        return envVariable
+  public checkIfEnvExist = (envVariable: string) => {
+    if (!envVariable) {
+      throw `${envVariable} not defined`;
     }
+    return envVariable;
+  };
 }

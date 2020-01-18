@@ -54,7 +54,9 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToMany(type => Role)
-  @JoinTable()
+  @ManyToMany(type => Role, {
+    onDelete: 'CASCADE',
+  })
+  @JoinTable({ name: 'userRole' })
   roles: Role[];
 }

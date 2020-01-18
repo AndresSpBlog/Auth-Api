@@ -7,4 +7,6 @@ export class Helpers {
     }
     return envVariable;
   };
+
+  public isDev = () => this.checkIfEnvExist(process.env.MODE) === 'DEV';
 }

@@ -7,7 +7,9 @@ export class Role extends Base {
   @PrimaryGeneratedColumn('uuid')
   roleId: string;
 
-  @ManyToMany(type => Permission)
-  @JoinTable()
-  permissions: Permissions[];
+  @ManyToMany(type => Permission, {
+    onDelete: 'CASCADE',
+  })
+  @JoinTable({ name: 'rolePermission' })
+  permissions: Permission[];
 }

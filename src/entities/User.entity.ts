@@ -6,11 +6,16 @@ import {
   UpdateDateColumn,
   ManyToMany,
   JoinTable,
+  BeforeInsert,
 } from 'typeorm';
 import { Role } from './Role.entity';
+import * as crypto from 'crypto';
+import { Helpers } from 'src/utils/helpers';
 
 @Entity()
 export class User {
+  constructor(private helpers: Helpers) {}
+
   @PrimaryGeneratedColumn('uuid')
   userId: string;
 
@@ -36,6 +41,11 @@ export class User {
     length: 60,
   })
   password: string;
+
+  @BeforeInsert()
+  hashPassword() {
+    this.password = this.helpers.hashPassword(this.password);
+  }
 
   @Column({
     length: 2,

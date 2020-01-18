@@ -7,10 +7,10 @@ import {
   ManyToMany,
   JoinTable,
   BeforeInsert,
+  Index,
 } from 'typeorm';
 import { Role } from './Role.entity';
-import * as crypto from 'crypto';
-import { Helpers } from 'src/utils/helpers';
+import { Helpers } from '../utils/helpers';
 
 @Entity()
 export class User {
@@ -29,6 +29,7 @@ export class User {
   })
   lastname: string;
 
+  @Index()
   @Column({
     length: 80,
   })
@@ -37,6 +38,7 @@ export class User {
   @Column()
   email: string;
 
+  @Index()
   @Column({
     length: 60,
   })

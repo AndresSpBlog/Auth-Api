@@ -27,7 +27,8 @@
     "docker:stop": "docker-compose stop",
     "docker:bash": "docker exec -it `docker ps | grep node | awk '{print $1}'` bash || true",
     "docker:prune:images": "docker rmi $(docker images --filter \"dangling=true\" -q --no-trunc) || echo \"Doesn't has images!\"",
-    "docker:prune:volumes": "docker volume prune -f"
+    "docker:prune:volumes": "docker volume prune -f",
+    "typeorm:cli": "npx ts-node ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "@nestjs/common": "^6.7.2",

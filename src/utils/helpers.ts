@@ -9,4 +9,6 @@ export class Helpers {
   };
 
   public isDev = () => this.checkIfEnvExist(process.env.MODE) === 'DEV';
+  public runMigrations = () =>
+    !!this.checkIfEnvExist(process.env.RUN_MIGRATIONS) === true;
 }

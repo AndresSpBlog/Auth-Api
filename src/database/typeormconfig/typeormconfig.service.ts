@@ -24,8 +24,9 @@ export class TypeormconfigService implements TypeOrmOptionsFactory {
       subscribers: [
         path.resolve(__dirname + '../../../') + '/**/subscribers/*{.ts,.js}',
       ],
-      synchronize: helpers.isDev(),
+      //synchronize: helpers.isDev(),
       dropSchema: helpers.isDev(),
+      migrationsRun: helpers.runMigrations(),
       logging: helpers.isDev ? 'all' : ['error'],
     };
   }

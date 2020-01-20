@@ -18,8 +18,6 @@ export class Seeds1579421120717 implements MigrationInterface {
     );
     RoleSeeds.map(async role => await roleRepository.save(role));
     UserSeeds.map(async user => await userRepository.save(user));
-
-    //console.log(await permissionRepository.find());
   }
 
   public async down(queryRunner: QueryRunner): Promise<any> {}

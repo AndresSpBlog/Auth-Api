@@ -53,19 +53,19 @@ export class init1579413415040 implements MigrationInterface {
       undefined,
     );
     await queryRunner.query(
-      `ALTER TABLE "rolePermission" ADD CONSTRAINT "FK_b02bd7a7bbfd25fb4bfc6f7ccfb" FOREIGN KEY ("roleRoleId") REFERENCES "role"("roleId") ON DELETE CASCADE ON UPDATE NO ACTION`,
+      `ALTER TABLE "rolePermission" ADD CONSTRAINT "FK_b02bd7a7bbfd25fb4bfc6f7ccfb" FOREIGN KEY ("roleRoleId") REFERENCES "role"("roleId") ON DELETE CASCADE ON UPDATE CASCADE`,
       undefined,
     );
     await queryRunner.query(
-      `ALTER TABLE "rolePermission" ADD CONSTRAINT "FK_59ec169844b7036626e30c6890b" FOREIGN KEY ("permissionPermissionId") REFERENCES "permission"("permissionId") ON DELETE CASCADE ON UPDATE NO ACTION`,
+      `ALTER TABLE "rolePermission" ADD CONSTRAINT "FK_59ec169844b7036626e30c6890b" FOREIGN KEY ("permissionPermissionId") REFERENCES "permission"("permissionId") ON DELETE CASCADE ON UPDATE CASCADE`,
       undefined,
     );
     await queryRunner.query(
-      `ALTER TABLE "userRole" ADD CONSTRAINT "FK_6071418e050a8f6fc4bb7598f56" FOREIGN KEY ("userUserId") REFERENCES "user"("userId") ON DELETE CASCADE ON UPDATE NO ACTION`,
+      `ALTER TABLE "userRole" ADD CONSTRAINT "FK_6071418e050a8f6fc4bb7598f56" FOREIGN KEY ("userUserId") REFERENCES "user"("userId") ON DELETE CASCADE ON UPDATE CASCADE`,
       undefined,
     );
     await queryRunner.query(
-      `ALTER TABLE "userRole" ADD CONSTRAINT "FK_dba26d09e70de1a054d4c61f51f" FOREIGN KEY ("roleRoleId") REFERENCES "role"("roleId") ON DELETE CASCADE ON UPDATE NO ACTION`,
+      `ALTER TABLE "userRole" ADD CONSTRAINT "FK_dba26d09e70de1a054d4c61f51f" FOREIGN KEY ("roleRoleId") REFERENCES "role"("roleId") ON DELETE CASCADE ON UPDATE CASCADE`,
       undefined,
     );
   }

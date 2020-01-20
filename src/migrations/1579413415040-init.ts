@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class init1579380658905 implements MigrationInterface {
-  name = 'init1579380658905';
+export class init1579413415040 implements MigrationInterface {
+  name = 'init1579413415040';
 
   public async up(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.query(
@@ -9,7 +9,11 @@ export class init1579380658905 implements MigrationInterface {
       undefined,
     );
     await queryRunner.query(
-      `CREATE TABLE "permission" ("name" character varying NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "permissionId" uuid NOT NULL DEFAULT uuid_generate_v4(), CONSTRAINT "PK_86b314be9c1be5c62b3a9d97ae4" PRIMARY KEY ("permissionId"))`,
+      `CREATE TYPE "permission_action_enum" AS ENUM('create', 'read', 'list', 'update', 'delete')`,
+      undefined,
+    );
+    await queryRunner.query(
+      `CREATE TABLE "permission" ("name" character varying NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "permissionId" uuid NOT NULL DEFAULT uuid_generate_v4(), "action" "permission_action_enum" NOT NULL, "resource" character varying NOT NULL, CONSTRAINT "PK_86b314be9c1be5c62b3a9d97ae4" PRIMARY KEY ("permissionId"))`,
       undefined,
     );
     await queryRunner.query(
@@ -49,19 +53,19 @@ export class init1579380658905 implements MigrationInterface {
       undefined,
     );
     await queryRunner.query(
-      `ALTER TABLE "rolePermission" ADD CONSTRAINT "FK_b02bd7a7bbfd25fb4bfc6f7ccfb" FOREIGN KEY ("roleRoleId") REFERENCES "role"("roleId") ON DELETE CASCADE ON UPDATE CASCADE`,
+      `ALTER TABLE "rolePermission" ADD CONSTRAINT "FK_b02bd7a7bbfd25fb4bfc6f7ccfb" FOREIGN KEY ("roleRoleId") REFERENCES "role"("roleId") ON DELETE CASCADE ON UPDATE NO ACTION`,
       undefined,
     );
     await queryRunner.query(
-      `ALTER TABLE "rolePermission" ADD CONSTRAINT "FK_59ec169844b7036626e30c6890b" FOREIGN KEY ("permissionPermissionId") REFERENCES "permission"("permissionId") ON DELETE CASCADE ON UPDATE CASCADE`,
+      `ALTER TABLE "rolePermission" ADD CONSTRAINT "FK_59ec169844b7036626e30c6890b" FOREIGN KEY ("permissionPermissionId") REFERENCES "permission"("permissionId") ON DELETE CASCADE ON UPDATE NO ACTION`,
       undefined,
     );
     await queryRunner.query(
-      `ALTER TABLE "userRole" ADD CONSTRAINT "FK_6071418e050a8f6fc4bb7598f56" FOREIGN KEY ("userUserId") REFERENCES "user"("userId") ON DELETE CASCADE ON UPDATE CASCADE`,
+      `ALTER TABLE "userRole" ADD CONSTRAINT "FK_6071418e050a8f6fc4bb7598f56" FOREIGN KEY ("userUserId") REFERENCES "user"("userId") ON DELETE CASCADE ON UPDATE NO ACTION`,
       undefined,
     );
     await queryRunner.query(
-      `ALTER TABLE "userRole" ADD CONSTRAINT "FK_dba26d09e70de1a054d4c61f51f" FOREIGN KEY ("roleRoleId") REFERENCES "role"("roleId") ON DELETE CASCADE ON UPDATE CASCADE`,
+      `ALTER TABLE "userRole" ADD CONSTRAINT "FK_dba26d09e70de1a054d4c61f51f" FOREIGN KEY ("roleRoleId") REFERENCES "role"("roleId") ON DELETE CASCADE ON UPDATE NO ACTION`,
       undefined,
     );
   }
@@ -111,6 +115,7 @@ export class init1579380658905 implements MigrationInterface {
     );
     await queryRunner.query(`DROP TABLE "user"`, undefined);
     await queryRunner.query(`DROP TABLE "permission"`, undefined);
+    await queryRunner.query(`DROP TYPE "permission_action_enum"`, undefined);
     await queryRunner.query(`DROP TABLE "role"`, undefined);
   }
 }

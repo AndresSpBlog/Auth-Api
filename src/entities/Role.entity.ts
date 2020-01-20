@@ -5,11 +5,11 @@ import { Permission } from './Permission.entity';
 @Entity()
 export class Role extends Base {
   @PrimaryGeneratedColumn('uuid')
-  roleId: string;
+  roleId?: string;
 
   @ManyToMany(type => Permission, {
     onDelete: 'CASCADE',
   })
   @JoinTable({ name: 'rolePermission' })
-  permissions: Permission[];
+  permissions?: Permission[];
 }

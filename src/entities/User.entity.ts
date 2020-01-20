@@ -14,20 +14,20 @@ import { Helpers } from '../utils/helpers';
 
 @Entity()
 export class User {
-  constructor(private helpers: Helpers) {}
+  constructor(public helpers: Helpers) {}
 
   @PrimaryGeneratedColumn('uuid')
-  userId: string;
+  userId?: string;
 
   @Column({
     nullable: true,
   })
-  firstname: string;
+  firstname?: string;
 
   @Column({
     nullable: true,
   })
-  lastname: string;
+  lastname?: string;
 
   @Index()
   @Column({
@@ -45,20 +45,20 @@ export class User {
   password: string;
 
   @BeforeInsert()
-  hashPassword() {
+  hashPassword? = () => {
     this.password = this.helpers.hashPassword(this.password);
-  }
+  };
 
   @Column({
     length: 2,
     nullable: true,
   })
-  countryCode: string;
+  countryCode?: string;
 
   @Column({
     nullable: true,
   })
-  profileImg: string;
+  profileImg?: string;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -70,5 +70,5 @@ export class User {
     onDelete: 'CASCADE',
   })
   @JoinTable({ name: 'userRole' })
-  roles: Role[];
+  roles?: Role[];
 }

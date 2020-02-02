@@ -9,11 +9,7 @@ export class init1579413415040 implements MigrationInterface {
       undefined,
     );
     await queryRunner.query(
-      `CREATE TYPE "permission_action_enum" AS ENUM('create', 'read', 'list', 'update', 'delete')`,
-      undefined,
-    );
-    await queryRunner.query(
-      `CREATE TABLE "permission" ("name" character varying NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "permissionId" uuid NOT NULL DEFAULT uuid_generate_v4(), "action" "permission_action_enum" NOT NULL, "resource" character varying NOT NULL, CONSTRAINT "PK_86b314be9c1be5c62b3a9d97ae4" PRIMARY KEY ("permissionId"))`,
+      `CREATE TABLE "permission" ("name" character varying NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "permissionId" uuid NOT NULL DEFAULT uuid_generate_v4(), "action" character varying NOT NULL, "resource" character varying NOT NULL, CONSTRAINT "PK_86b314be9c1be5c62b3a9d97ae4" PRIMARY KEY ("permissionId"))`,
       undefined,
     );
     await queryRunner.query(

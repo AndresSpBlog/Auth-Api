@@ -11,5 +11,6 @@ const generateRole = (roleName: string): Role => ({
 export const RoleSeeds = [
   generateRole('Founder'),
   generateRole('Admin'),
+  generateRole('Mod'),
   generateRole('User'),
 ];
